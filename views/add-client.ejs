@@ -1,0 +1,237 @@
+
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<link rel="stylesheet" type="text/css" href="/themes/k5/css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="/themes/k5/css/k5.css" />
+<link rel="stylesheet" type="text/css" href="/themes/k5/datepicker/css/datepicker.css" />
+<link rel="stylesheet" href="/css/jquery.tagsinput.css" title="" type="" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+<script type="text/javascript" src="/themes/k5/datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="/themes/k5/flashuploader/swfobject.js"></script>
+<script type="text/javascript" src="/themes/k5/js/k5.js"></script>
+<script src=//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.1.0/bootstrap.min.js></script>
+<script type="text/javascript" src=/themes/k5/js/coffee-script.js></script>
+<script type="text/coffeescript" src=/themes/k5/js/jsonProcess.v2.coffee></script>
+<script type="text/javascript" charset="utf-8" src=/js/jquery.tagsinput.min.js></script>
+<title>K5 Website Administrator - Add Project</title>
+
+</head>
+
+<body id=add-edit-wrap>
+<div>
+	<div id="yw0" class="navbar">
+<div class="navbar-inner navbar-fixed-top">
+<div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/index.php?r=admin"><strong>K5 Website Administrator</strong></a>
+<div class="nav-collapse">
+<ul class="nav pull-right">
+<li><a href="/index.php?r=admin/default/logout">Logout (admin)</a></li>
+</ul></div>
+</div>
+</div>
+</div>
+	<div style="margin-top: 40px;clear: left;">
+		<ul class="breadcrumbs breadcrumb">
+<li><a href="index.php?r=/admin">Home</a> <span class="divider">/</span></li>
+<li><a href="/index.php?r=admin/project/index">Projects</a> <span class="divider">/</span></li>
+<li><span>Add</span></li>
+</ul>	</div>
+		<div id="sidebar" class="span3">
+</div> <!--sidebar-->
+
+<div id="rightside" class="span9">
+
+
+<legend>Add Client</legend>
+<div id="alert-success" class="alert alert-success hide fade in" data-alert="alert" style="top:0">
+    <a class="close" data-dismiss="alert" href="#">x</a>
+    <p><strong>Success!</strong>Soup for you!</p>
+</div>
+<div id="alert-fail" class="alert alert-error hide fade in" data-alert="alert" style="top:0">
+    <a class="close" data-dismiss="alert" href="#">x</a>
+    <p><strong>Fail!</strong>No soup for you.</p>
+</div>
+<form id="client-form" action="/index.php?r=/admin/project/add" method="post">
+
+	<p class="note">
+		Fields with <span class="required">*</span> are required.
+	</p>
+
+
+
+		<p>
+		<label for="Project_title" class="required">Title <span class="required">*</span></label>		<input maxlength="255" class="input-xlarge" name="Project[title]" id="Project_title" type="text" value="" />				</p>
+
+
+		<p>
+		</p>
+		</p>
+    <input type="submit" name="yt0" value="Save" />
+    </form>
+    <div class="modal hide fade" id="media-modal">
+      <form id='media-form0' class='form-horizontal'>
+	<!--start modal content-->
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal" href="#">x</a>
+        <h3>Media</h3>
+    </div>
+    <div class="modal-body">
+        	<input type='hidden' value='' name='id'>
+        	<input type='hidden' value='saveMedia' name='action'>
+
+		    <div class="control-group">
+		      <label class="control-label" for="title">Title</label>
+		      <div class="controls">
+		        	<input type="text" class="input-xlarge" id="title" name="title" required=required>
+		      </div>
+		      </div>
+		      <div class="control-group">
+		      <label class="control-label" for="execution">Eecution Type</label>
+		      <div class="controls">
+		        	<select id="execution" name=execution>
+		            	<option value=banner>Banner</option>
+		            </select>
+		      </div>
+		      </div>
+		      <div class="control-group">
+		      <label class="control-label" for="sender-name">Format</label>
+		      <div class="controls">
+		        	<select id="format" name=format>
+		            	<option>Thumbnail</option>
+		            </select>
+		      </div>
+		      </div>
+		      <div class="control-group">
+		      <label class="control-label" for="sender-email">Dimensions</label>
+		      	<div class="controls">
+		        	<input type="number" class="span1" id="height" name="width" required=required> px wide &nbsp;&nbsp;
+		        	<input type="number" class="span1" id="width" name="height" required=required> px high
+		        </div>
+		      </div>
+		      <div class="control-group">
+		      <label class="control-label" for="sender-email">Link</label>
+		      <div class="controls">
+		        	<input type="text" class="input-xlarge" id="link" name="link" required=required>
+		      </div>
+		      </div>
+		      <div class="control-group">
+		      <label class="control-label" for="carousel">Use in Carousel</label>
+		      <div class="controls">
+		      	<div style="margin-left: 15px;margin-top:5px;">
+			      	<label class="radio inline">
+		                Yes
+		         	</label>
+		                <input class="carousel" id=r1 type="radio" name="carousel" value="1" />
+			      	<label class="radio inline">
+		                No
+		             </label>
+		                <input class="carousel" id=r2 type="radio" name="carousel" value="0" />
+	             </div>
+		      </div>
+		      </div>
+		      <div class="control-group">
+		      <label class="control-label" for="description">Description</label>
+		      <div class="controls">
+		        	<textarea class="input-xlarge" id="description" name="description" rows="5" required=required></textarea>
+		      </div>
+		    </div>
+    </div>
+    <div class="modal-footer">
+        <a class="btn primary" data-dismiss="modal" href="#">Cancel</a>
+        <a class="btn secondary save-media" data-dismiss="modal" id="review-send-btn">Send</a>
+    </div>
+    <!--end modal content-->
+        </form>
+</div>
+
+<div class="modal hide fade" id="awards-modal">
+	<!--start modal content-->
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal" href="#">x</a>
+        <h3>Awards</h3>
+    </div>
+    <div class="modal-body">
+        <form id='media-form1' class='form-horizontal'>
+        	<input type='hidden' value='' name='id'>
+        	<input type='hidden' value='saveMedia' name='action'>
+
+		    <div class="control-group">
+		      <label class="control-label" for="name">Name</label>
+		      <div class="controls">
+		        	<input type="text" class="input-xlarge" id="name" name="name">
+		      </div>
+		      </div>
+		      <div class="control-group">
+		      <label class="control-label" for="sender-name">URL</label>
+		      <div class="controls">
+		        	<select id="execution" name=url>
+		            	<option>www</option>
+		            </select>
+		      </div>
+		      </div>
+		      <div class="control-group">
+		      <label class="control-label" for="sender-name">Year</label>
+		      <div class="controls">
+		        	<select id="format" name=year>
+		            	<option>2012</option>
+		            </select>
+		      </div>
+		      </div>
+		      <div class="control-group">
+		      <label class="control-label" for="badge">Badge</label>
+		      	<div class="controls">
+		        	<input type="text" class="span1" id="badge" name=badge>
+		        </div>
+		      </div>
+    <div class="modal-footer">
+        <a class="btn primary" data-dismiss="modal" href="#">Cancel</a>
+        <a class="btn secondary save-awards" data-dismiss="modal" id="review-send-btn">Send</a>
+    </div>
+    <!--end modal content-->
+</form>
+  </div>
+</div>
+
+<form id='media-form2' class='form-horizontal'>
+<div class="modal hide fade" id="links-modal">
+	<!--start modal content-->
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal" href="#">x</a>
+        <h3>Links</h3>
+    </div>
+    <div class="modal-body">
+
+		    <div class="control-group">
+		      <label class="control-label" for="name">Link</label>
+		      <div class="controls">
+		        	<input type="text" class="input-xlarge" id="links" name=links>
+		      </div>
+		      </div>
+		      <div class="control-group">
+		      <label class="control-label" for="badge">Url</label>
+		      	<div class="controls">
+		        	<input type="text" class="span3" id="url2" name=url2>
+		        </div>
+		      </div>
+    <div class="modal-footer">
+        <a class="btn primary" data-dismiss="modal" href="#">Cancel</a>
+        <a class="btn secondary save-links" data-dismiss="modal" id="review-send-btn">Send</a>
+    </div>
+  </form>
+    <!--end modal content-->
+</form>
+</div>
+
+
+
+</div> <!--rightside-->
+</div>
+</body>
+</html>

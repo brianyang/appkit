@@ -1,0 +1,204 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<link rel="stylesheet" type="text/css" href="/themes/k5/css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="/themes/k5/css/k5.css" />
+<link rel="stylesheet" type="text/css" href="/themes/k5/datepicker/css/datepicker.css" />
+<script type="text/javascript" src="/assets/b1b13145/jquery.js"></script>
+<script type="text/javascript" src="/themes/k5/datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="/themes/k5/flashuploader/swfobject.js"></script>
+<script type="text/javascript" src="/themes/k5/js/k5.js"></script>
+<script type="text/javascript" src="/assets/a245d98e/bootstrap.min.js"></script>
+<script type="text/javascript" src=/themes/k5/js/coffee-script.js></script>
+<script type="text/coffeescript" src=/themes/k5/js/jsonProcess.coffee></script>
+  <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.0.14.min.js"></script>
+  <script type="text/coffeescript">
+
+###
+Parse.initialize "LwJmzi7AbYdZQk2x0AK2YsPOFZAPGqmcDi9KTODB", "4tvFdmspEdseuA8ByM0PCVtT1OqLMxeDtGptV8yj"
+
+K5Object = Parse.Object.extend 'k5works'
+k5Object = new K5Object()
+
+###
+k5Object.save
+    project:'title',
+        success: (object) ->
+            $('.success').show()
+        error: (model,error) ->
+            $('.error').show()
+    
+###
+
+query = new Parse.Query(K5Object)
+query.find(
+    success: (results) ->
+        console.log results
+        $('#rightside').append('<ul />')
+        $(results).each ->
+        	console.log this
+        	console.log this.attributes.project
+        	$('#rightside>ul').append '<li><a href=/project-add.html?id=' + this.id + ' >' + this.attributes.project + '</a></li>'
+
+    error: ->
+        console.log 'err'
+    )
+###
+      
+  </script>
+<title>K5 Website Administrator - Add Project</title>
+
+</head>
+
+<body>
+<div >
+	<div id="yw0" class="navbar">
+<div class="navbar-inner navbar-fixed-top">
+<div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/index.php?r=admin"><strong>K5 Website Administrator</strong></a>
+<div class="nav-collapse">
+<ul class="nav pull-right">
+<li><a href="/index.php?r=admin/default/logout">Logout (admin)</a></li>
+</ul></div>
+</div>
+</div>
+</div>
+	<div style="margin-top: 40px;clear: left;">
+		<ul class="breadcrumbs breadcrumb">
+<li><a href="index.php?r=/admin">Home</a> <span class="divider">/</span></li>
+<li><a href="/index.php?r=admin/project/index">Projects</a> <span class="divider">/</span></li>
+<li><span>Add</span></li>
+</ul>	</div>
+		<div id="sidebar" class="span3">
+	<div class="well sidebar-nav"><ul class="nav nav-list" id="yw1">
+<li class="nav-header"><span>Projects</span></li><li><a href="/"><i class="icon-user"></i> Manage</a></li>
+<li><a href="/project-add.html"><i class="icon-th"></i> Add</a></li>
+
+<li class="nav-header"><span>Pages</span></li><li><a href="index.php?r=/admin/project/manage"><i class="icon-user"></i> Manage</a></li>
+
+<li class="nav-header"><span>Clients</span></li><li><a href="index.php?r=/admin/client/manage"><i class="icon-user"></i> Manage</a></li>
+<li><a href="index.php?r=/admin/client/add"><i class="icon-th"></i> Add</a></li>
+
+<li class="nav-header"><span>Work Categories</span></li><li><a href="index.php?r=/admin/workcategory/manage"><i class="icon-user"></i> Manage</a></li>
+<li><a href="index.php?r=/admin/workcategory/add"><i class="icon-th"></i> Add</a></li>
+
+<li class="nav-header"><span>Service Categories</span></li><li><a href="index.php?r=/admin/servicecategory/manage"><i class="icon-user"></i> Manage</a></li>
+<li><a href="index.php?r=/admin/servicecategory/add"><i class="icon-th"></i> Add</a></li>
+
+</ul></div>	</div> <!--sidebar-->
+
+<div id="rightside" class="span9">
+
+
+<legend>project view</legend>
+<div id="alert-success" class="alert alert-success hide fade in" data-alert="alert" style="top:0">
+    <a class="close" data-dismiss="alert" href="#">x</a>
+    <p><strong>Success!</strong>Soup for you!</p>
+</div>
+<div id="alert-fail" class="alert alert-error hide fade in" data-alert="alert" style="top:0">
+    <a class="close" data-dismiss="alert" href="#">x</a>
+    <p><strong>Fail!</strong>No soup for you.</p>
+</div>
+<form id="project-form" action="/index.php?r=/admin/project/add" method="post">
+
+
+	<p class="note">
+		Fields with <span class="required">*</span> are required.
+	</p>
+
+
+
+</form>
+</div>
+
+<div class="modal hide fade" id="awards-modal">
+	<!--start modal content-->
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal" href="#">x</a>
+        <h3>Awards</h3>
+    </div>
+    <div class="modal-body">
+        <form id='media-form1' class='form-horizontal'>
+        	<input type='hidden' value='' name='id'>
+        	<input type='hidden' value='saveMedia' name='action'>
+
+		    <div class="control-group">
+		      <label class="control-label" for="name">Name</label>
+		      <div class="controls">
+		        	<input type="text" class="input-xlarge" id="name" name="name">
+		      </div>
+		      </div>
+		      <div class="control-group">
+		      <label class="control-label" for="sender-name">URL</label>
+		      <div class="controls">
+		        	<select id="execution" name=url>
+		            	<option>www</option>
+		            </select>
+		      </div>
+		      </div>
+		      <div class="control-group">
+		      <label class="control-label" for="sender-name">Year</label>
+		      <div class="controls">
+		        	<select id="format" name=year>
+		            	<option>2012</option>
+		            </select>
+		      </div>
+		      </div>
+		      <div class="control-group">
+		      <label class="control-label" for="badge">Badge</label>
+		      	<div class="controls">
+		        	<input type="text" class="span1" id="badge" name=badge>
+		        </div>
+		      </div>
+    <div class="modal-footer">
+        <a class="btn primary" data-dismiss="modal" href="#">Cancel</a>
+        <a class="btn secondary save-awards" data-dismiss="modal" id="review-send-btn">Send</a>
+    </div>
+    <!--end modal content-->
+</form>
+  </div>
+</div>
+
+<form id='media-form2' class='form-horizontal'>
+<div class="modal hide fade" id="links-modal">
+	<!--start modal content-->
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal" href="#">x</a>
+        <h3>Links</h3>
+    </div>
+    <div class="modal-body">
+
+		    <div class="control-group">
+		      <label class="control-label" for="name">Link</label>
+		      <div class="controls">
+		        	<input type="text" class="input-xlarge" id="links" name=links>
+		      </div>
+		      </div>
+		      <div class="control-group">
+		      <label class="control-label" for="badge">Url</label>
+		      	<div class="controls">
+		        	<input type="text" class="span3" id="url2" name=url2>
+		        </div>
+		      </div>
+    <div class="modal-footer">
+        <a class="btn primary" data-dismiss="modal" href="#">Cancel</a>
+        <a class="btn secondary save-links" data-dismiss="modal" id="review-send-btn">Send</a>
+    </div>
+  </form>
+    <!--end modal content-->
+</form>
+</div>
+
+
+
+</div> <!--rightside-->
+</div>
+</body>
+</html>

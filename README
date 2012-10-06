@@ -1,0 +1,14 @@
+App with API Kit
+----
+
+contents:
+server db -> Express on Mongo
+interface -> Brunch with Chaplin
+
+deploy to heroku
+
+* set mongoconnect to process.env.MONGOHQ_URL
+* set listen to process.env.PORT
+  heroku create --stack cedar thisapp
+  heroku addons:add mongohq:free
+
