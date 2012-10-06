@@ -11,59 +11,51 @@
     Schema = mongoose.Schema
     ObjectId = Schema.ObjectID
 
-    Client = new Schema
-      name:
-        type: String
-        trim: true
+    Recipe = new Schema
+      title: String
 
-
-    Client = mongoose.model 'Client', Client
+    Recipe = mongoose.model 'Recipe', Recipe
 
     app.set 'view engine', 'ejs'
     app.set 'views', __dirname + '/views'
     app.use express.bodyParser()
     app.use express.static __dirname + '/public'
 
+    appkit = []
+    appkit.recipe = []
 
-    apikit = []
-    apikit.root = (req,res) ->
+    appkit.twitter = (req,res) ->
       res.render 'index.ejs'
 
-    apikit.getSingleClient = (req,res) ->
-      Client.findOne {_id: req.params.id }, (error,data) ->
-        res.json data
+    appkit.sandbox = (req,res) ->
+      res.render 'sandbox.ejs'
 
-    apikit.addclient = (req,res) ->
-      client_data =
-        name: req.params.name
-
-      client = new Client(client_data)
-      client.save (error, data) ->
+    appkit.recipe.read = (req,res) -># {{{
+      Recipe.find {}, (error,data) ->
+        res.json data# }}}
+    appkit.recipe.create = (req,res) -># {{{
+      recipeInfo =
+        title: req.params.title
+      recipe = new Recipe(recipeInfo)
+      recipe.save (error, data) ->
         if(error)
           res.json error
         else
-          res.json data
+          res.json data# }}}
+    appkit.recipe.delete = (req,res) -># {{{
+      Recipe.find({_id:req.params.id}).remove()
+      res.send 'done'# }}}
+
+    appkit.recipe.update = (req,res) ->
+      res.send 'update'
 
 
-    apikit.addClientProject = (req,res) ->
-      client = new Client()# {{{
-      Client.findOne {_id: req.params.id}, (error,client) ->
-        if(error)
-          res.json(error)
-        else if(client == null)
-          res.json('no such client')
-        else
-          client.project.push({ projectId: req.query.projectId })
-          client.save (error, data) ->
-            if(error)
-              res.json error
-            else
-              res.json data
-          # }}}
+    app.get '/twitter', appkit.twitter
 
-    app.get '/twitter', apikit.root
-    app.get '/v1/clients/:id', apikit.getSingleClient
-
+    app.get '/sandbox', appkit.sandbox
+    app.get '/v1/recipes', appkit.recipe.read
+    app.post '/v1/recipe/:title', appkit.recipe.create
+    app.update '/v1/recipe/:id', appkit.recipe.update
+    app.delete '/v1/recipe/:id', appkit.recipe.delete
 
     app.listen(process.env.PORT || 3001)
-
