@@ -15,7 +15,6 @@
       name:
         type: String
         trim: true
-      project: [Project]
 
 
     Client = mongoose.model 'Client', Client
@@ -26,15 +25,15 @@
     app.use express.static __dirname + '/public'
 
 
+    apikit = []
+    apikit.root = (req,res) ->
+      res.render 'index.ejs'
 
-    k5app.listClient = (req,res) ->
-      res.render 'list-client.ejs'
-
-    k5app.getSingleClient = (req,res) ->
+    apikit.getSingleClient = (req,res) ->
       Client.findOne {_id: req.params.id }, (error,data) ->
         res.json data
 
-    k5app.addclient = (req,res) ->
+    apikit.addclient = (req,res) ->
       client_data =
         name: req.params.name
 
@@ -46,7 +45,7 @@
           res.json data
 
 
-    k5app.addClientProject = (req,res) ->
+    apikit.addClientProject = (req,res) ->
       client = new Client()# {{{
       Client.findOne {_id: req.params.id}, (error,client) ->
         if(error)
@@ -62,7 +61,8 @@
               res.json data
           # }}}
 
-    app.get '/v1/clients/:id', k5app.getSingleClient
+    app.get '/twitter', apikit.root
+    app.get '/v1/clients/:id', apikit.getSingleClient
 
 
     app.listen(process.env.PORT || 3001)
