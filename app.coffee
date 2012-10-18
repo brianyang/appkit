@@ -46,14 +46,14 @@
       Recipe.find({_id:req.params.id}).remove()
       res.send 'done'# }}}
 
-    appkit.recipe.update = (req,res) ->
-      res.send 'update'
+    #appkit.recipe.update = (req,res) ->
+      #res.send 'update'
 
 
     app.get '/twitter', appkit.twitter
 
     app.get '/sandbox', appkit.sandbox
-    
+
     app.get '/v1/*', (req,res,next) ->
       res.contentType('application/json')
       next()
@@ -66,10 +66,10 @@
     app.delete '/v1/*', (req,res,next) ->
       res.contentType('application/json')
       next()
-    
+
     app.get '/v1/recipes', appkit.recipe.read
     app.post '/v1/recipe/:title', appkit.recipe.create
-    app.update '/v1/recipe/:id', appkit.recipe.update
+    #app.update '/v1/recipe/:id', appkit.recipe.update
     app.delete '/v1/recipe/:id', appkit.recipe.delete
 
     app.listen(process.env.PORT || 3001)
